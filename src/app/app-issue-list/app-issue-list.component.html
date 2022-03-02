@@ -6,7 +6,7 @@
     <div class="issue-list">
 
         <div class="add-btn mt-10 mb-10 flex justify-end">
-            <a href="" class="btn">Add Problem</a>
+            <button (click)="addProblem()"  class="btn cursor-pointer ">Add Problem</button>
            
         </div>
 
@@ -39,7 +39,7 @@
                        <td class="px-12 text-sm font-semibold tracking-wide text-left" >text</td>
                        
                        <td>
-                           <button> <i class="m-3 fa-solid fa-pencil"></i> </button>
+                           <button (click)="editProblem()"> <i   class="m-3 fa-solid fa-pencil cursor-pointer"></i> </button>
                            <button> <i class="m-3 fa-solid fa-trash-can"></i> </button>
                            <button> <i class="m-3 fa-solid fa-square-check"></i> </button>
                            

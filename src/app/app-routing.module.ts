@@ -13,8 +13,12 @@ const routes: Routes = [
     component: AppAddProblemComponent
   },
   {
+    path: 'edit/:id',
+    component: AppAddProblemComponent
+  },
+  {
     path: '**',
-    redirectTo: 'add'
+    redirectTo: 'list'
   }
 ];
 

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-app-issue-list',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppIssueListComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router:Router
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  addProblem(){
+    this.router.navigateByUrl('/add')
+  }
+  editProblem(){
+    this.router.navigateByUrl('/edit/1')
   }
 
 }
