@@ -12,9 +12,14 @@
 }
 
 
-input , select {
+input , select , textarea{
   border: 2px solid #3f3f46;
-  background: #f3f4f6;
+  background: #fff;
   border-radius: 5px;
 }
 
+
+.file-upload {
+  border:3px dotted;
+  background-color: #fdfdfd;
+}
