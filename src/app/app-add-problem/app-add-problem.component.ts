@@ -8,11 +8,15 @@ import { Router } from '@angular/router';
 })
 export class AppAddProblemComponent implements OnInit {
 
+  showAddForm= true;
   constructor(private router:Router) { }
 
   ngOnInit(): void {
   }
   cancel(){
     this.router.navigateByUrl('/list')
+  }
+  nextPhase(){
+    this.showAddForm = false
   }
 }
