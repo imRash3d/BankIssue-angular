@@ -6,17 +6,21 @@ import { AppComponent } from './app.component';
 import { AppIssueListComponent } from './app-issue-list/app-issue-list.component';
 import { AppIssueCreatePhase1Component } from './app-issue-create-phase1/app-issue-create-phase1.component';
 import { AppAddProblemComponent } from './app-add-problem/app-add-problem.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     AppIssueListComponent,
     AppIssueCreatePhase1Component,
-    AppAddProblemComponent
+    AppAddProblemComponent,
+   
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

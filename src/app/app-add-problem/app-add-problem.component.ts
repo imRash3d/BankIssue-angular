@@ -19,4 +19,7 @@ export class AppAddProblemComponent implements OnInit {
   nextPhase(){
     this.showAddForm = false
   }
+  backToForm(){
+    this.showAddForm = true
+  }
 }
