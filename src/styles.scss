@@ -18,6 +18,13 @@ input , select , textarea{
   border-radius: 5px;
 }
 
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #3f3f46;
+}
+
+.mat-form-field-appearance-outline .mat-form-field-wrapper {
+   margin: 0 0 !important; 
+}
 
 .file-upload {
   border:3px dotted;
@@ -35,12 +42,16 @@ input , select , textarea{
 // }
 
 @media only screen and (max-width: 600px) {
-  th ,td {
-    padding: 20px 10px;
+  .issue-list {
+    th ,td {
+      padding: 20px 10px;
+    }
   }
+  
 }
 
 @media only screen and (min-width: 768px) {
+  .issue-list {
   th {
     padding: 20px 10px;
   }
@@ -48,13 +59,19 @@ input , select , textarea{
     padding: 10px 10px;
   }
 }
+}
 
 
 @media only screen and (min-width: 1200px) {
+  .issue-list {
   th ,td {
     padding: 20px 15px;
     width: 168px;
     display: inline-block;
     height: 61px;
 }
+  }
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

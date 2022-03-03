@@ -7,6 +7,12 @@ import { AppIssueListComponent } from './app-issue-list/app-issue-list.component
 import { AppIssueCreatePhase1Component } from './app-issue-create-phase1/app-issue-create-phase1.component';
 import { AppAddProblemComponent } from './app-add-problem/app-add-problem.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -20,7 +26,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
+    MatInputModule ,
+    MatNativeDateModule,
+    MatSelectModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]

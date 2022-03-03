@@ -4,59 +4,81 @@
         <div class="flex w-full">
             <div class="w-3/12 mr-8">
                 <p class="text-sm text-black font-semibold py-2">Title</p>
-                <input type="email" placeholder="Title" class="w-full	 border-neutral-800 form-input px-4 py-3 ">
+                <!--  <input matInput  type="email" placeholder="Title" class="w-full	 border-neutral-800 form-input px-4 py-3 "> -->
+                <mat-form-field class="example-full-width " appearance="outline">
+                    <mat-label>Title</mat-label>
+                    <input matInput>
+                </mat-form-field>
             </div>
             <div class="w-9/12	">
                 <p class="text-sm text-black font-semibold py-2">Related To</p>
-                <!-- <input type="email" placeholder="Title" class="w-full	 border-neutral-800 form-input px-4 py-3 "> -->
-                <select class="px-4 py-3  w-full  shadow-sm block">
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
-                </select>
+
+                <mat-form-field appearance="outline" class="w-full">
+                    <mat-label>Select</mat-label>
+                    <mat-select>
+                        <mat-option value="one">Claim </mat-option>
+                        <mat-option value="two">Insurance</mat-option>
+                        <mat-option value="two">Both</mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
             <div class="w-5/12	 mx-8">
                 <p class="text-sm text-black font-semibold py-2">Department</p>
-                <select class="px-4 py-3  w-full  shadow-sm block">
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
-                </select>
+                <mat-form-field appearance="outline" class="w-full">
+                    <mat-label>Select</mat-label>
+                    <mat-select>
+                        <mat-option value="one">Local </mat-option>
+                        <mat-option value="two">National</mat-option>
+                        <mat-option value="two">International</mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
             <div class="w-5/12	 mx-8 mr-0">
                 <p class="text-sm text-black font-semibold py-2">Tags</p>
-                <input type="email" placeholder="Title" class="w-full	 border-neutral-800 form-input px-4 py-3 ">
+
+                <mat-form-field class="example-full-width w-full " appearance="outline">
+                    <mat-label>Tags</mat-label>
+                    <input matInput>
+                </mat-form-field>
             </div>
         </div>
         <div class="flex w-full mt-5 border-b-2 border-slate-900 pb-5">
             <div class="w-3/12 mr-8">
                 <p class="text-sm text-black font-semibold py-2">Problem Lead</p>
-                <input type="email" placeholder="Title" class="w-full	 border-neutral-800 form-input px-4 py-3 ">
+
+                <mat-form-field class="example-full-width w-full " appearance="outline">
+                    <mat-label>Problem Lead</mat-label>
+                    <input matInput>
+                </mat-form-field>
             </div>
             <div class="w-5/12	 mx-8 ">
                 <p class="text-sm text-black font-semibold py-2">Problem Lead Email</p>
-                <input type="email" placeholder="Title" class="w-full	 border-neutral-800 form-input px-4 py-3 ">
+                <mat-form-field class="example-full-width w-full " appearance="outline">
+                    <mat-label>Problem Lead Email</mat-label>
+                    <input matInput>
+                </mat-form-field>
             </div>
             <div class="w-9/12	">
                 <p class="text-sm text-black font-semibold py-2">Department Code</p>
-                <!-- <input type="email" placeholder="Title" class="w-full	 border-neutral-800 form-input px-4 py-3 "> -->
-                <select class="px-4 py-3  w-full  shadow-sm block">
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
-                </select>
+                <mat-form-field appearance="outline" class="w-full">
+                    <mat-label>Select</mat-label>
+                    <mat-select>
+                        <mat-option value="one">001 - Front Office </mat-option>
+                        <mat-option value="two">029 - Back Office</mat-option>
+                        <!-- <mat-option value="two">International</mat-option> -->
+                    </mat-select>
+                </mat-form-field>
             </div>
             <div class="w-5/12	 mx-8 mr-0">
                 <p class="text-sm text-black font-semibold py-2">Agents</p>
-                <select class="px-4 py-3  w-full  shadow-sm block">
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
-                </select>
+                <mat-form-field appearance="outline" class="w-full">
+                    <mat-label>Select</mat-label>
+                    <mat-select>
+                        <mat-option value="one">001 - Front Office </mat-option>
+                        <mat-option value="two">029 - Back Office</mat-option>
+                        <!-- <mat-option value="two">International</mat-option> -->
+                    </mat-select>
+                </mat-form-field>
             </div>
 
         </div>
@@ -71,30 +93,41 @@
             <div class="flex w-full mt-5 border-b-2 border-slate-900 pb-5">
                 <div class="w-3/12 mr-8">
                     <p class="text-sm text-black font-semibold py-2">Code</p>
-                    <input type="email" placeholder="Title" class="w-full	 border-neutral-800 form-input px-4 py-3 ">
+                    <mat-form-field class="example-full-width w-full " appearance="outline">
+                        <mat-label>Code</mat-label>
+                        <input matInput>
+                    </mat-form-field>
                 </div>
                 <div class="w-5/12	 mx-8 ">
                     <p class="text-sm text-black font-semibold py-2">Category</p>
-                    <input type="email" placeholder="Title" class="w-full	 border-neutral-800 form-input px-4 py-3 ">
+                    <mat-form-field class="example-full-width w-full " appearance="outline">
+                        <mat-label>Category</mat-label>
+                        <input matInput>
+                    </mat-form-field>
                 </div>
                 <div class="w-9/12	">
                     <p class="text-sm text-black font-semibold py-2">Family</p>
-                    <!-- <input type="email" placeholder="Title" class="w-full	 border-neutral-800 form-input px-4 py-3 "> -->
-                    <select class="px-4 py-3  w-full  shadow-sm block">
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
-                    </select>
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label>Select</mat-label>
+                        <mat-select>
+                            <mat-option value="one">Local </mat-option>
+                            <mat-option value="two">National</mat-option>
+                            <mat-option value="two">International</mat-option>
+                     
+                        </mat-select>
+                    </mat-form-field>
                 </div>
                 <div class="w-5/12	 mx-8 mr-0">
                     <p class="text-sm text-black font-semibold py-2">Family Division</p>
-                    <select class="px-4 py-3  w-full  shadow-sm block">
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
-                    </select>
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label>Select</mat-label>
+                        <mat-select>
+                            <mat-option value="one">Howrah, Park Street </mat-option>
+                            <mat-option value="two">Howrah, Park Street</mat-option>
+                            <mat-option value="two">Howrah, Park Street</mat-option>
+                     
+                        </mat-select>
+                    </mat-form-field>
                 </div>
 
             </div>
@@ -108,30 +141,41 @@
             <div class="flex w-full mt-5 border-b-2 border-slate-900 pb-5">
                 <div class="w-3/12 mr-8">
                     <p class="text-sm text-black font-semibold py-2">Code</p>
-                    <input type="email" placeholder="Title" class="w-full	 border-neutral-800 form-input px-4 py-3 ">
+                    <mat-form-field class="example-full-width w-full " appearance="outline">
+                        <mat-label>Code</mat-label>
+                        <input matInput>
+                    </mat-form-field>
                 </div>
                 <div class="w-5/12	 mx-8 ">
                     <p class="text-sm text-black font-semibold py-2">Category</p>
-                    <input type="email" placeholder="Title" class="w-full	 border-neutral-800 form-input px-4 py-3 ">
+                    <mat-form-field class="example-full-width w-full " appearance="outline">
+                        <mat-label>Category</mat-label>
+                        <input matInput>
+                    </mat-form-field>
                 </div>
                 <div class="w-9/12	">
                     <p class="text-sm text-black font-semibold py-2">Family</p>
-                    <!-- <input type="email" placeholder="Title" class="w-full	 border-neutral-800 form-input px-4 py-3 "> -->
-                    <select class="px-4 py-3  w-full  shadow-sm block">
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
-                    </select>
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label>Select</mat-label>
+                        <mat-select>
+                            <mat-option value="one">Local </mat-option>
+                            <mat-option value="two">National</mat-option>
+                            <mat-option value="two">International</mat-option>
+                     
+                        </mat-select>
+                    </mat-form-field>
                 </div>
                 <div class="w-5/12	 mx-8 mr-0">
                     <p class="text-sm text-black font-semibold py-2">Family Division</p>
-                    <select class="px-4 py-3  w-full  shadow-sm block">
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
-                    </select>
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label>Select</mat-label>
+                        <mat-select>
+                            <mat-option value="one">Howrah, Park Street </mat-option>
+                            <mat-option value="two">Howrah, Park Street</mat-option>
+                            <mat-option value="two">Howrah, Park Street</mat-option>
+                     
+                        </mat-select>
+                    </mat-form-field>
                 </div>
 
             </div>
@@ -143,18 +187,28 @@
                 <div class="flex w-full justify-between	">
                     <div class=" mx-3 ml-0  w-1/3">
                         <p class="text-sm text-black font-semibold py-2">Text</p>
-                        <input type="email" placeholder="Title"
-                            class="w-full	 border-neutral-800 form-input px-4 py-3 ">
+                        <mat-form-field class="example-full-width w-full " appearance="outline">
+                            <mat-label>Text</mat-label>
+                            <input matInput>
+                        </mat-form-field>
                     </div>
                     <div class="w-1/3	mx-3  ">
                         <p class="text-sm text-black font-semibold py-2">From When</p>
-                        <input type="email" placeholder="Title"
-                            class="w-full	 border-neutral-800 form-input px-4 py-3 ">
+                        <mat-form-field appearance="outline" class="w-full">
+                            <mat-label>Choose a date</mat-label>
+                            <input matInput [matDatepicker]="picker">
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
                     </div>
                     <div class="w-1/3 mx-3 	 ">
                         <p class="text-sm text-black font-semibold py-2">From To</p>
-                        <input type="email" placeholder="Title"
-                            class="w-full	 border-neutral-800 form-input px-4 py-3 ">
+                        <mat-form-field appearance="outline" class="w-full">
+                            <mat-label>Choose a date</mat-label>
+                            <input matInput [matDatepicker]="picker2">
+                            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                            <mat-datepicker #picker2></mat-datepicker>
+                        </mat-form-field>
                     </div>
                 </div>
                 <div class="flex w-full mt-5 ustify-between ">
@@ -187,10 +241,11 @@
                         <button (click)="cancel()" class="btn bg-red-600 cursor-pointer">Cancel</button>
                     </div>
                     <div class=" ">
-                        <button  class="btn bg-blue-600 cursor-pointer">Submit</button>
+                        <button class="btn bg-blue-600 cursor-pointer">Submit</button>
                     </div>
                     <div class=" mx-3 	 ">
-                        <button (click)="nextPhase()" class="btn bg-emerald-500 cursor-pointer">Move to next Phase</button>
+                        <button (click)="nextPhase()" class="btn bg-emerald-500 cursor-pointer">Move to next
+                            Phase</button>
                     </div>
                 </div>
 
