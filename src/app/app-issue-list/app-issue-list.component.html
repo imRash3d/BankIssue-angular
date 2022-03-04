@@ -15,11 +15,12 @@
                 <thead>
                     <tr class="">
                         <th class=" text-sm font-semibold tracking-wide text-left">Department</th>
-                        <th class=" text-sm font-semibold tracking-wide text-left" >Ttitle</th>
+                        <th class=" text-sm font-semibold tracking-wide text-left" >Title</th>
                         <th class=" text-sm font-semibold tracking-wide text-left" >Description</th>
                         <th class=" text-sm font-semibold tracking-wide text-left" >Claim/Insurance</th>
                         <th class="text-sm font-semibold tracking-wide text-left" >Analysis Required</th>
                         <th class=" text-sm font-semibold tracking-wide text-left" >Problem Lead</th>
+                        <th class=" text-sm font-semibold tracking-wide text-left" >Problem Email</th>
                         <th class=" text-sm font-semibold tracking-wide text-left" >Site</th>
                         
                         <th class=" text-sm font-semibold tracking-wide text-left" >External Links</th>
@@ -28,15 +29,20 @@
                 </thead>
 
                 <tbody>
-                    <tr >
-                       <td class=" border-current text-sm font-semibold tracking-wide text-left" >text</td>
-                       <td class=" text-sm font-semibold tracking-wide text-left" >text</td>
-                       <td class=" text-sm font-semibold tracking-wide text-left" >text</td>
-                       <td class=" text-sm font-semibold tracking-wide text-left" >text</td>
-                       <td class=" text-sm font-semibold tracking-wide text-left" >text</td>
-                       <td class=" text-sm font-semibold tracking-wide text-left" >text</td>
-                       <td class=" text-sm font-semibold tracking-wide text-left" >text</td>
-                       <td class=" text-sm font-semibold tracking-wide text-left" >text</td>
+                    <tr  *ngFor="let problem of problems">
+                       <td class=" border-current text-sm font-semibold tracking-wide text-left" >{{problem.Department}}</td>
+                       <td class=" border-current text-sm font-semibold tracking-wide text-left" >{{problem.Title}}</td>
+                       <td class=" border-current text-sm font-semibold tracking-wide text-left" >{{problem.Text}}</td>
+                       <td class=" border-current text-sm font-semibold tracking-wide text-left" >
+                           <span *ngFor="let item of problem.Tags">{{item}}</span>
+                       </td>
+                       <td class=" border-current text-sm font-semibold tracking-wide text-left" >{{problem.IsAnlysisRequired}}</td>
+                       <td class=" border-current text-sm font-semibold tracking-wide text-left" >{{problem.ProblemLeadName}}</td>
+                       <td class=" border-current text-sm font-semibold tracking-wide text-left" >{{problem.ProblemLeadEmail}}</td>
+                       <td class=" border-current text-sm font-semibold tracking-wide text-left" >{{problem.Site}}</td>
+                    
+                       <td class=" border-current text-sm font-semibold tracking-wide text-left" >{{problem.ExternalLink}}</td>
+                 
                        
                        <td class="text-center">
                            <button (click)="editProblem()"> <i   class="xl:m-2 md:m-1 fa-solid fa-pencil cursor-pointer"></i> </button>

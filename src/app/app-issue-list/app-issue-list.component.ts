@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { BankProblemService } from '../@services/bank-problem.service';
 
 @Component({
   selector: 'app-app-issue-list',
@@ -7,18 +8,22 @@ import { Router } from '@angular/router';
   styleUrls: ['./app-issue-list.component.scss']
 })
 export class AppIssueListComponent implements OnInit {
-
-  constructor(
-    private router:Router
-  ) { }
+  problems = []
+    ; constructor(
+      private bankProblemService: BankProblemService,
+      private router: Router
+    ) { }
 
   ngOnInit(): void {
+    this.bankProblemService.getProblems().subscribe(_problems => {
+      this.problems = _problems;
+    })
   }
 
-  addProblem(){
+  addProblem() {
     this.router.navigateByUrl('/add')
   }
-  editProblem(){
+  editProblem() {
     this.router.navigateByUrl('/edit/1')
   }
 

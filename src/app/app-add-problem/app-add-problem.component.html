@@ -1,5 +1,5 @@
 <div class="create-problem sm:p-24 xl:p-44 flex  bg-gray-100">
-    <form class=" w-full bg-white p-5 shadow" *ngIf="showAddForm">
+    <form class=" w-full bg-white p-5 shadow" [formGroup]="createProblem" *ngIf="showAddForm">
 
         <div class="flex w-full">
             <div class="w-3/12 mr-8">
@@ -7,7 +7,7 @@
                 <!--  <input matInput  type="email" placeholder="Title" class="w-full	 border-neutral-800 form-input px-4 py-3 "> -->
                 <mat-form-field class="example-full-width " appearance="outline">
                     <mat-label>Title</mat-label>
-                    <input matInput>
+                    <input formControlName="Title" matInput>
                 </mat-form-field>
             </div>
             <div class="w-9/12	">
@@ -15,10 +15,10 @@
 
                 <mat-form-field appearance="outline" class="w-full">
                     <mat-label>Select</mat-label>
-                    <mat-select>
-                        <mat-option value="one">Claim </mat-option>
-                        <mat-option value="two">Insurance</mat-option>
-                        <mat-option value="two">Both</mat-option>
+                    <mat-select formControlName="IssueType">
+                        <mat-option class="text-capitalize" [value]="item" *ngFor="let item of issueTypes">{{item}}
+                        </mat-option>
+
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -26,19 +26,22 @@
                 <p class="text-sm text-black font-semibold py-2">Department</p>
                 <mat-form-field appearance="outline" class="w-full">
                     <mat-label>Select</mat-label>
-                    <mat-select>
-                        <mat-option value="one">Local </mat-option>
-                        <mat-option value="two">National</mat-option>
-                        <mat-option value="two">International</mat-option>
+                    <mat-select formControlName="Department">
+                        <mat-option value="one" *ngFor="let item of departments">{{item.Value}} </mat-option>
+                      
                     </mat-select>
                 </mat-form-field>
             </div>
             <div class="w-5/12	 mx-8 mr-0">
                 <p class="text-sm text-black font-semibold py-2">Tags</p>
 
-                <mat-form-field class="example-full-width w-full " appearance="outline">
-                    <mat-label>Tags</mat-label>
-                    <input matInput>
+                <mat-form-field appearance="outline" class="w-full">
+                    <mat-label>Select</mat-label>
+                    <mat-select multiple formControlName="Tags">
+                        <mat-option class="text-capitalize" [value]="item" *ngFor="let item of tags">{{item}}
+                        </mat-option>
+
+                    </mat-select>
                 </mat-form-field>
             </div>
         </div>
@@ -48,24 +51,23 @@
 
                 <mat-form-field class="example-full-width w-full " appearance="outline">
                     <mat-label>Problem Lead</mat-label>
-                    <input matInput>
+                    <input formControlName="ProblemLeadName" matInput>
                 </mat-form-field>
             </div>
             <div class="w-5/12	 mx-8 ">
                 <p class="text-sm text-black font-semibold py-2">Problem Lead Email</p>
                 <mat-form-field class="example-full-width w-full " appearance="outline">
                     <mat-label>Problem Lead Email</mat-label>
-                    <input matInput>
+                    <input matInput type="email" formControlName="ProblemLeadEmail">
                 </mat-form-field>
             </div>
             <div class="w-9/12	">
                 <p class="text-sm text-black font-semibold py-2">Department Code</p>
                 <mat-form-field appearance="outline" class="w-full">
                     <mat-label>Select</mat-label>
-                    <mat-select>
-                        <mat-option value="one">001 - Front Office </mat-option>
-                        <mat-option value="two">029 - Back Office</mat-option>
-                        <!-- <mat-option value="two">International</mat-option> -->
+                    <mat-select formControlName="DepartmentCode" multiple>
+                        <mat-option class="text-capitalize" [value]="item" *ngFor="let item of departmentCodes">{{item}}
+                        </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -73,10 +75,11 @@
                 <p class="text-sm text-black font-semibold py-2">Agents</p>
                 <mat-form-field appearance="outline" class="w-full">
                     <mat-label>Select</mat-label>
-                    <mat-select>
-                        <mat-option value="one">001 - Front Office </mat-option>
-                        <mat-option value="two">029 - Back Office</mat-option>
-                        <!-- <mat-option value="two">International</mat-option> -->
+                    <mat-select formControlName="Agents" multiple>
+                        <mat-option [value]="agent" *ngFor="let agent of agents"> {{agent.Value}} -
+                            {{agent.Name}} </mat-option>
+
+
                     </mat-select>
                 </mat-form-field>
             </div>
@@ -86,34 +89,35 @@
 
         <!--  Related to Claim-->
 
-        <ng-container>
+        <ng-container *ngIf="createProblem?.get('ShowCliam')?.value">
             <div>
                 <p class="text-sm text-black font-semibold py-2 mt-5">Related To (Cliam)</p>
             </div>
-            <div class="flex w-full mt-5 border-b-2 border-slate-900 pb-5">
+            <div class="flex w-full mt-5 border-b-2 border-slate-900 pb-5" formGroupName="Claim">
                 <div class="w-3/12 mr-8">
                     <p class="text-sm text-black font-semibold py-2">Code</p>
                     <mat-form-field class="example-full-width w-full " appearance="outline">
                         <mat-label>Code</mat-label>
-                        <input matInput>
+                        <input formControlName="Code" matInput>
                     </mat-form-field>
                 </div>
                 <div class="w-5/12	 mx-8 ">
                     <p class="text-sm text-black font-semibold py-2">Category</p>
-                    <mat-form-field class="example-full-width w-full " appearance="outline">
-                        <mat-label>Category</mat-label>
-                        <input matInput>
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label>Select</mat-label>
+                        <mat-select formControlName="Category" multiple>
+                            <mat-option class="text-capitalize" [value]="item" *ngFor="let item of catagories">{{item}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
                 <div class="w-9/12	">
                     <p class="text-sm text-black font-semibold py-2">Family</p>
                     <mat-form-field appearance="outline" class="w-full">
                         <mat-label>Select</mat-label>
-                        <mat-select>
-                            <mat-option value="one">Local </mat-option>
-                            <mat-option value="two">National</mat-option>
-                            <mat-option value="two">International</mat-option>
-                     
+                        <mat-select formControlName="Family" (selectionChange)="onSelectFamily($event.value,'claim')">
+                            <mat-option class="text-capitalize" [value]="item" *ngFor="let item of families">{{item}}
+                            </mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
@@ -121,11 +125,11 @@
                     <p class="text-sm text-black font-semibold py-2">Family Division</p>
                     <mat-form-field appearance="outline" class="w-full">
                         <mat-label>Select</mat-label>
-                        <mat-select>
-                            <mat-option value="one">Howrah, Park Street </mat-option>
-                            <mat-option value="two">Howrah, Park Street</mat-option>
-                            <mat-option value="two">Howrah, Park Street</mat-option>
-                     
+                        <mat-select formControlName="FamilyDivision">
+                            <mat-option class="text-capitalize" [value]="item"
+                                *ngFor="let item of familyDivison['claim']">{{item}} </mat-option>
+
+
                         </mat-select>
                     </mat-form-field>
                 </div>
@@ -134,35 +138,37 @@
         </ng-container>
 
         <!--   Related to Inssurance-->
-        <ng-container>
+        <ng-container *ngIf="createProblem?.get('ShowInsurance')?.value">
             <div>
                 <p class="text-sm text-black font-semibold py-2 mt-5">Related To (Insurance)</p>
             </div>
-            <div class="flex w-full mt-5 border-b-2 border-slate-900 pb-5">
+            <div class="flex w-full mt-5 border-b-2 border-slate-900 pb-5" formGroupName="Insurance">
                 <div class="w-3/12 mr-8">
                     <p class="text-sm text-black font-semibold py-2">Code</p>
                     <mat-form-field class="example-full-width w-full " appearance="outline">
                         <mat-label>Code</mat-label>
-                        <input matInput>
+                        <input formControlName="Code" matInput>
                     </mat-form-field>
                 </div>
-                
+
                 <div class="w-5/12	 mx-8 ">
                     <p class="text-sm text-black font-semibold py-2">Category</p>
-                    <mat-form-field class="example-full-width w-full " appearance="outline">
-                        <mat-label>Category</mat-label>
-                        <input matInput>
+                    <mat-form-field appearance="outline" class="w-full">
+                        <mat-label>Select</mat-label>
+                        <mat-select formControlName="Category" multiple>
+                            <mat-option class="text-capitalize" [value]="item" *ngFor="let item of catagories">{{item}}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
                 <div class="w-9/12	">
                     <p class="text-sm text-black font-semibold py-2">Family</p>
                     <mat-form-field appearance="outline" class="w-full">
                         <mat-label>Select</mat-label>
-                        <mat-select>
-                            <mat-option value="one">Local </mat-option>
-                            <mat-option value="two">National</mat-option>
-                            <mat-option value="two">International</mat-option>
-                     
+                        <mat-select (selectionChange)="onSelectFamily($event.value,'insurance')"
+                            formControlName="Family">
+                            <mat-option class="text-capitalize" [value]="item" *ngFor="let item of families">{{item}}
+                            </mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>
@@ -170,11 +176,10 @@
                     <p class="text-sm text-black font-semibold py-2">Family Division</p>
                     <mat-form-field appearance="outline" class="w-full">
                         <mat-label>Select</mat-label>
-                        <mat-select>
-                            <mat-option value="one">Howrah, Park Street </mat-option>
-                            <mat-option value="two">Howrah, Park Street</mat-option>
-                            <mat-option value="two">Howrah, Park Street</mat-option>
-                     
+                        <mat-select formControlName="FamilyDivision">
+                            <mat-option class="text-capitalize" [value]="item"
+                                *ngFor="let item of familyDivison['insurance']">{{item}} </mat-option>
+
                         </mat-select>
                     </mat-form-field>
                 </div>
@@ -183,21 +188,21 @@
         </ng-container>
 
 
-        <div class="dept-of-p flex w-full mt-5 flex-row justify-between			">
+        <div class="dept-of-p flex w-full mt-5 flex-row justify-between	">
             <div class="problem-form w-3/4	mt-5 mr-8 flex flex-col  ">
                 <div class="flex w-full justify-between	">
                     <div class=" mx-3 ml-0  w-1/3">
                         <p class="text-sm text-black font-semibold py-2">Text</p>
                         <mat-form-field class="example-full-width w-full " appearance="outline">
                             <mat-label>Text</mat-label>
-                            <input matInput>
+                            <input formControlName="Text" matInput>
                         </mat-form-field>
                     </div>
                     <div class="w-1/3	mx-3  ">
                         <p class="text-sm text-black font-semibold py-2">From When</p>
                         <mat-form-field appearance="outline" class="w-full">
                             <mat-label>Choose a date</mat-label>
-                            <input matInput [matDatepicker]="picker">
+                            <input readonly formControlName="FromWhen" matInput [matDatepicker]="picker">
                             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
@@ -206,7 +211,7 @@
                         <p class="text-sm text-black font-semibold py-2">From To</p>
                         <mat-form-field appearance="outline" class="w-full">
                             <mat-label>Choose a date</mat-label>
-                            <input matInput [matDatepicker]="picker2">
+                            <input readonly formControlName="ToWhen" matInput [matDatepicker]="picker2">
                             <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
                             <mat-datepicker #picker2></mat-datepicker>
                         </mat-form-field>
@@ -215,7 +220,13 @@
                 <div class="flex w-full mt-5 ustify-between ">
                     <div class=" w-2/4	">
                         <p class="text-sm text-black font-semibold py-2">Comments</p>
-                        <textarea class="w-full	h-40		block  border-neutral-800 form-input px-4 py-3 "></textarea>
+
+                        <mat-form-field class="w-full	h-40		block  border-neutral-800 form-input px-4 py-3 "
+                            appearance="outline">
+                            <mat-label>Comments</mat-label>
+                            <textarea formControlName="Comments" class="h-40" matInput></textarea>
+                        </mat-form-field>
+
                     </div>
 
 
@@ -233,8 +244,10 @@
         <div class="dept-of-p mt-8 flex w-full flex-row justify-between">
             <div class=" w-2/4	mt-10 flex 	items-start	  p-5 ">
 
-                <input class="mt-1 mr-5" type="checkbox" value="" id="flexCheckChecked" checked>
-                <p class="text-sm pt-0 pb-0 w-1/4 text-black font-semibold py-2">Is Analysis required ? </p>
+
+                <mat-checkbox formControlName="IsAnlysisRequired"
+                    class="text-sm pt-0 pb-0 w-1/4 text-black font-semibold py-2">Is Analysis required ?</mat-checkbox>
+
             </div>
             <div class=" w-3/4	mt-10  flex flex-col  ">
                 <div class="flex w-full justify-end	">
@@ -242,7 +255,7 @@
                         <button (click)="cancel()" class="btn bg-red-600 cursor-pointer">Cancel</button>
                     </div>
                     <div class=" ">
-                        <button class="btn bg-blue-600 cursor-pointer">Submit</button>
+                        <button (click)="submitForm()" class="btn bg-blue-600 cursor-pointer">Submit</button>
                     </div>
                     <div class=" mx-3 	 ">
                         <button (click)="nextPhase()" class="btn bg-emerald-500 cursor-pointer">Move to next
@@ -411,9 +424,6 @@
 
         <div class="dept-of-p mt-8 flex w-full flex-row justify-between">
             <div class=" w-2/4	mt-10 flex 	items-start	  p-5 ">
-
-                <!-- <input class="mt-1 mr-5" type="checkbox" value="" id="flexCheckChecked" checked>
-                <p class="text-sm pt-0 pb-0 w-1/4 text-black font-semibold py-2">Is Analysis required ? </p> -->
             </div>
             <div class=" w-3/4	mt-10  flex flex-col  ">
                 <div class="flex w-full justify-end	">
