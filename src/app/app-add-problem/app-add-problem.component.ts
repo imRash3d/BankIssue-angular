@@ -25,7 +25,7 @@ export class AppAddProblemComponent implements OnInit {
   };
 
   agents = [];
- departments = [];
+  departments = [];
   constructor(
     private bankProblemService: BankProblemService,
     private commonService: CommonService,
@@ -86,10 +86,13 @@ export class AppAddProblemComponent implements OnInit {
 
     model['Claim'] = model.ShowCliam ? model['Claim'] : null;
     model['Insurance'] = model.ShowCliam ? model['Insurance'] : null;
-    model['ToWhen']= new Date( model['ToWhen']).toISOString();
-    model['FromWhen']= new Date( model['FromWhen']).toISOString();
-    this.bankProblemService.createProblem(this.createProblem.value).subscribe(res => {
+    model['ToWhen'] = new Date(model['ToWhen']).toISOString();
+    model['FromWhen'] = new Date(model['FromWhen']).toISOString();
+    this.bankProblemService.createProblem(this.createProblem.value).subscribe((res: any) => {
       console.log(res)
+      if (res.Success) {
+        this.router.navigateByUrl('/list')
+      }
     })
   }
   ngOnInit(): void {

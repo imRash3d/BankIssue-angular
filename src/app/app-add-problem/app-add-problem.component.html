@@ -27,7 +27,7 @@
                 <mat-form-field appearance="outline" class="w-full">
                     <mat-label>Select</mat-label>
                     <mat-select formControlName="Department">
-                        <mat-option value="one" *ngFor="let item of departments">{{item.Value}} </mat-option>
+                        <mat-option [value]="item" *ngFor="let item of departments">{{item.Value}} </mat-option>
                       
                     </mat-select>
                 </mat-form-field>

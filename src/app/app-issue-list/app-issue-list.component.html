@@ -30,11 +30,11 @@
 
                 <tbody>
                     <tr  *ngFor="let problem of problems">
-                       <td class=" border-current text-sm font-semibold tracking-wide text-left" >{{problem.Department}}</td>
+                       <td class=" border-current text-sm font-semibold tracking-wide text-left" >{{problem.Department.Value}}</td>
                        <td class=" border-current text-sm font-semibold tracking-wide text-left" >{{problem.Title}}</td>
                        <td class=" border-current text-sm font-semibold tracking-wide text-left" >{{problem.Text}}</td>
                        <td class=" border-current text-sm font-semibold tracking-wide text-left" >
-                           <span *ngFor="let item of problem.Tags">{{item}}</span>
+                           <span class="title-name" *ngFor="let item of problem.Tags">{{item}}</span>
                        </td>
                        <td class=" border-current text-sm font-semibold tracking-wide text-left" >{{problem.IsAnlysisRequired}}</td>
                        <td class=" border-current text-sm font-semibold tracking-wide text-left" >{{problem.ProblemLeadName}}</td>
