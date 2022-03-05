@@ -18,6 +18,10 @@ export class BankProblemService {
     createProblem(data) {
         return this.http.post(this.API_URL + '/BankProblem/add', data);
     }
+    deelteProblem(data) {
+        return this.http.post(this.API_URL + '/BankProblem/delete/'+data.Id, data);
+    }
+
 
     getAgents() {
         return this.http.get(this.API_URL + '/query/agents').pipe(map((resposne: any) =>

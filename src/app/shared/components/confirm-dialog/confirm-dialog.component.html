@@ -1,1 +1,13 @@
-<p>confirm-dialog works!</p>
+<div class="confirm-dialog flex flex-col">
+    <div class="w-full">
+        <h1 mat-dialog-title>{{data?.title}} </h1>
+    </div>
+    <div class="w-full">
+        <p>{{data?.subtitle}} </p>
+
+    </div>
+    <div class="w-full flex justify-between">
+        <button class="btn  bg-red-600 cursor-pointer" (click)="cancel()">Cancel</button>
+        <button class="btn bg-blue-600 cursor-pointer" (click)="submit()">Ok</button>
+    </div>
+</div>

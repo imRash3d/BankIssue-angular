@@ -15,6 +15,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatDialogModule} from '@angular/material/dialog';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -32,13 +34,14 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatDatepickerModule,
-
+    MatDialogModule,
     MatInputModule ,
     MatNativeDateModule,
     MatCheckboxModule,
     MatSelectModule,
     MatSnackBarModule,
     HttpClientModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
