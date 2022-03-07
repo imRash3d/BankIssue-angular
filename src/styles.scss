@@ -98,5 +98,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 td,th {
   word-break:break-all;
-  white-space:nowrap;
+
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: 0;
+}
+
+.error-email {
+  position: absolute;
+  bottom: -26px ;
+  left:0;
+  color: red;
 }

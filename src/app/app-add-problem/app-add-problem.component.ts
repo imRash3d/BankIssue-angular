@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { AppConfig } from '../@app-config/app-config.constant';
 import { BankProblemService } from '../@services/bank-problem.service';
 import { CommonService } from '../@services/common.service';
@@ -26,69 +27,140 @@ export class AppAddProblemComponent implements OnInit {
 
   agents = [];
   departments = [];
+  problemId: string;
+  editMode = false;
   constructor(
     private bankProblemService: BankProblemService,
     private commonService: CommonService,
     private fb: FormBuilder,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.initForm()
   }
 
   initForm(data?: any) {
-    console.log(this.initIssue())
+
     return this.createProblem = this.fb.group({
       Title: [data && data.Title || '', [Validators.required]],
       Comments: [data && data.Comments || '', [Validators.required]],
       Text: [data && data.Text || '', [Validators.required]],
       //  Site: [data && data.Site || '', [Validators.required]],
-      Department: [data && data.Department || '', [Validators.required]],
+      Department: [data && data.Department && this.getMatchedDepartmens(data.Department) || '', [Validators.required]],
       DepartmentCode: [data && data.DepartmentCode || '', [Validators.required]],
       Tags: [data && data.Tags || '', [Validators.required]],
       ProblemLeadName: [data && data.ProblemLeadName || '', [Validators.required]],
-      ProblemLeadEmail: [data && data.ProblemLeadEmail || '', [Validators.required]],
+      ProblemLeadEmail: [data && data.ProblemLeadEmail || '', [Validators.required, Validators.email]],
       ExternalLink: [data && data.ExternalLink || 'test'],
-      FromWhen: [data && data.FromWhen || '', [Validators.required]],
-      ToWhen: [data && data.ToWhen || '', [Validators.required]],
+      FromWhen: [data && data.FromWhen && new Date(data.FromWhen) || '', [Validators.required]],
+      ToWhen: [data && data.ToWhen && new Date(data.ToWhen) || '', [Validators.required]],
       IsAnlysisRequired: [data && data.IsAnlysisRequired || false, [Validators.required]],
-      Claim: data && data.Claim && this.initIssue(data.Claim) || this.initIssue(),
-      Insurance: data && data.Insurance && this.initIssue(data.Insurance) || this.initIssue(),
-      Agents: [data && data.Agents || '', [Validators.required]],
-      IssueType: ['', [Validators.required]],
-      ShowCliam: [false],
-      ShowInsurance: [false],
-      Site: ['test']
+      Claim: data && data.Claim && this.initIssue(data.Claim,'claim') || this.initIssue(),
+      Insurance: data && data.Insurance && this.initIssue(data.Insurance,'insurance') || this.initIssue(),
+      Agents: [data && data.Agents && this.getMatchedAgents(data.Agents) || '', [Validators.required]],
+      IssueType: [data && data.Tags && this.getIssueType(data.Tags) || '', [Validators.required]],
+      ShowCliam: [data && data.Claim? true : false],
+      ShowInsurance: [data && data.Insurance?true : false],
+      Site: ['test'],
+      FileName:  [data && data.FileName || ''],
+      IsApproved:[data && data.IsApproved || false]
 
 
     })
 
   }
 
-  initIssue(data?: any) {
+  onFileUplaod(_res){
+    console.log(_res)
+    this.createProblem.get('FileName').setValue(_res.FileName);
+    this.createProblem.get('ExternalLink').setValue(_res.FilePath);
+  }
+
+  private getIssueType(_tags: Array<string>): string {
+    let _issueType = '';
+    if (_tags && _tags.length > 1) {
+      _issueType = AppConfig.BOTH
+    }
+    else if (_tags.includes(AppConfig.CLIAM)) {
+      _issueType = AppConfig.CLIAM
+    } else {
+      _issueType = AppConfig.INSURANCE
+    }
+
+    return _issueType;
+  }
+
+
+  private getMatchedDepartmens(_departments) {
+    const dept = this.departments.find(x => x.Id == _departments.Id);
+    return dept;
+  }
+  private getMatchedAgents(_agents) {
+    const agIds:Array<number> = _agents.map(x=>x.Id);
+
+    const agnts = this.agents.filter(x => agIds.includes(x.Id));
+    return agnts;
+  }
+
+  initIssue(data?: any,type?:string) {
     return this.fb.group({
+      Id:[data && data.Id && this.editMode && data.Id || null],
       Code: [data && data.Code || ''],
       Family: [data && data.Family || ''],
-      FamilyDivision: [data && data.FamilyDivision || ''],
+      FamilyDivision: [data && data.FamilyDivision && this.getMtchFamilyDivision(data.Family,type,data.FamilyDivision) || ''],
       Category: [data && data.Category || null],
     })
   }
 
+
+
+  private getMtchFamilyDivision(_family,_type,_fdivison){
+    
+    const fdivision = AppConfig.FAMILTY_DIVISION[String(_family).toUpperCase()]
+    this.familyDivison[_type] = fdivision;
+    console.log(this.familyDivison)
+    return _fdivison;
+  }
+
   submitForm() {
+
+
+
 
     if (this.createProblem.invalid) {
       this.commonService.showMessage('Required filed missing');
       return;
     }
+    if (!this.createProblem.get('FileName').value || !this.createProblem.get('ExternalLink').value) {
+      this.commonService.showMessage('file missing');
+      return;
+    }
 
 
     console.log(this.createProblem.value);
-    let model = this.createProblem.value;
+    let model = Object.assign({}, this.createProblem.value);
 
     model['Claim'] = model.ShowCliam ? model['Claim'] : null;
-    model['Insurance'] = model.ShowCliam ? model['Insurance'] : null;
+    model['Insurance'] = model.ShowInsurance ? model['Insurance'] : null;
     model['ToWhen'] = new Date(model['ToWhen']).toISOString();
     model['FromWhen'] = new Date(model['FromWhen']).toISOString();
-    this.bankProblemService.createProblem(this.createProblem.value).subscribe((res: any) => {
+
+
+    if(this.editMode){
+      model['Id'] = Number(this.problemId);
+    }else {
+      if(   model['Claim']) delete    model['Claim']['Id'];
+      if(   model['Insurance']) delete    model['Insurance']['Id'];
+    }
+
+    
+
+
+
+    let obs: Observable<any>;
+    obs = this.editMode ? this.bankProblemService.editProblem(model) : this.bankProblemService.createProblem(model);
+
+    obs.subscribe((res: any) => {
       console.log(res)
       if (res.Success) {
         this.router.navigateByUrl('/list')
@@ -99,6 +171,26 @@ export class AppAddProblemComponent implements OnInit {
 
     this.getAgents();
     this.getDepartments();
+
+
+
+    //edit route 
+
+    if (this.route.snapshot.params && this.route.snapshot.params.id) {
+      this.bankProblemService.getProblem(this.route.snapshot.params.id).subscribe(response => {
+
+        this.editMode = true;
+        this.problemId = this.route.snapshot.params.id;
+        this.initForm(response);
+        console.log(response)
+        console.log(this.createProblem.value);
+      })
+    }
+
+
+
+
+
 
 
 
@@ -173,7 +265,7 @@ export class AppAddProblemComponent implements OnInit {
   nextPhase() {
     this.showAddForm = false
   }
-  backToForm() {
-    this.showAddForm = true
+  backToForm(value) {
+    this.showAddForm = value;
   }
 }

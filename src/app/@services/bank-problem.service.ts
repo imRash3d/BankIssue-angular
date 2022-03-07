@@ -18,8 +18,18 @@ export class BankProblemService {
     createProblem(data) {
         return this.http.post(this.API_URL + '/BankProblem/add', data);
     }
+
+    editProblem(data) {
+        return this.http.post(this.API_URL + '/BankProblem/update/'+data.Id, data);
+    }
+
+
+
+    approvedProblem(data) {
+        return this.http.post(this.API_URL + '/BankProblem/approved-problem', data);
+    }
     deelteProblem(data) {
-        return this.http.post(this.API_URL + '/BankProblem/delete/'+data.Id, data);
+        return this.http.delete(this.API_URL + '/BankProblem/delete/' + data.Id, data);
     }
 
 
@@ -38,5 +48,17 @@ export class BankProblemService {
         return this.http.get(this.API_URL + '/BankProblem/list').pipe(map((resposne: any) =>
             resposne.Success ? resposne.Result : []
         ));
+    }
+
+    getProblem(id: number) {
+        return this.http.get(this.API_URL + '/BankProblem/' + id).pipe(map((resposne: any) =>
+            resposne.Success ? resposne.Result : null
+        ));
+    }
+
+    uploadFile(file:any){
+
+        return this.http.post(this.API_URL + '/File/upload-file', file);
+        
     }
 }

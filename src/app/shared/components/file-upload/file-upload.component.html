@@ -1,0 +1,14 @@
+<div appDragDrop (fileDropped)="onFileDropped($event)"  (click)="fileDropRef.click()"
+    class="fileUpload h-52 cursor-pointer w-full content-center	 flex flex-col justify-center		mt-10 file-upload items-center		shadow   p-5 text-center">
+
+<ng-template #NO_NAME>
+    <p class="w-full"><i class="fa-solid fa-upload"></i></p>
+    <p class="w-full"> Drag and Drop or Click to file upload</p>
+</ng-template>
+    <p *ngIf="fileName ;else NO_NAME">{{fileName}}</p>
+    <!-- <button></button> -->
+
+
+</div>
+
+<input class="file" type="file" #fileDropRef id="fileDropRef" (change)="fileBrowseHandler($event)">

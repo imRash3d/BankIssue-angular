@@ -28,8 +28,8 @@ export class AppIssueListComponent implements OnInit {
   addProblem() {
     this.router.navigateByUrl('/add')
   }
-  editProblem() {
-    this.router.navigateByUrl('/edit/1')
+  editProblem(problem) {
+    this.router.navigateByUrl('/edit/' + problem.Id)
   }
 
   deleteitem(problem) {
@@ -45,6 +45,33 @@ export class AppIssueListComponent implements OnInit {
           if (res.Success) {
             this.problems = this.problems.filter(x => x.Id !== problem.Id);
             this.commonsService.showMessage('Item deleted successfully')
+          }
+        })
+      }
+      // console.log('The dialog was closed');
+
+    });
+  }
+
+
+  approvedItem(problem) {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '250px',
+      data: { title: 'Confirm Approved', subtitle: 'Are you sure want to approved?' },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const model = {
+          Id: problem.Id,
+          IsApproved: true
+        }
+        this.bankProblemService.approvedProblem(model).subscribe((res: any) => {
+          console.log(res)
+          if (res.Success) {
+
+             problem.IsApproved = model.IsApproved;
+            
           }
         })
       }
