@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { forkJoin } from 'rxjs';
 import { BankProblemService } from 'src/app/@services/bank-problem.service';
 
 @Component({
@@ -8,38 +9,68 @@ import { BankProblemService } from 'src/app/@services/bank-problem.service';
 })
 export class FileUploadComponent implements OnInit {
 
-  file: any;
-  fileName:string;
+  files: any;
+  fileName: string;
+  uploadedFiles = [];
   @Output() onUplodFileEmmit = new EventEmitter();
   constructor(
     private bankProblemService: BankProblemService
   ) { }
 
+  upenUrl(e, fileName) {
+    e.stopPropagation();
+    this.bankProblemService.getFile(fileName).subscribe(blob => {
+      //  console.log(res)
+      let url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      document.body.appendChild(a);
+      a.href = url;
+      a.download = fileName;
+      a.target = '_blank';
+      a.click();
+    })
+
+  }
+
   ngOnInit(): void {
   }
   onFileDropped($event: any) {
-    console.log($event[0])
-    this.file = $event[0];
+
+    this.files = $event;
     this.uploadFile();
   }
   fileBrowseHandler(e: any) {
-    // console.log(e);
-    this.file = e.target.files[0];
+    //   console.log(e.target.files);
+    this.files = e.target.files;
     this.uploadFile();
   }
 
 
   uploadFile() {
-    const formData = new FormData();
-    formData.append('file', this.file)
-    console.log(formData)
-    this.bankProblemService.uploadFile(formData)
-      .subscribe((r: any) => {
-        if (r.Success) {
-          this.fileName = r.Result.FileName;
+    if (!this.files || !this.files.length) return;
+
+    console.log(this.files)
+    const callList = [];
+
+    for (const file of this.files) {
+      const formData = new FormData();
+      formData.append('file', file) // appending every file to formdata
+      callList.push(this.bankProblemService.uploadFile(formData))
+    }
+
+
+
+
+
+
+    forkJoin(callList).subscribe((_response: any) => {
+      if (_response.every(x => x.Success)) {
+        _response.forEach(r => {
           this.onUplodFileEmmit.emit(r.Result);
-        }
-      //  console.log(r)
-      })
+          this.uploadedFiles = this.uploadedFiles.concat(r.Result);
+          console.log(this.uploadedFiles)
+        })
+      }
+    })
   }
 }

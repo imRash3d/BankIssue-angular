@@ -61,4 +61,14 @@ export class BankProblemService {
         return this.http.post(this.API_URL + '/File/upload-file', file);
         
     }
+    getFile(fileName:string){
+
+        return this.http.get(this.API_URL + '/File/'+ fileName,{
+            observe: 'response',
+            responseType: 'blob'
+        }).pipe(map(res=>{
+            return res.body
+        }))
+        
+    }
 }
