@@ -63,17 +63,16 @@ export class AppAddProblemComponent implements OnInit {
       ShowInsurance: [data && data.Insurance?true : false],
       Site: ['test'],
       FileName:  [data && data.FileName || ''],
+      Files:  [data && data.Files || null],
       IsApproved:[data && data.IsApproved || false]
-
+      
 
     })
 
   }
 
   onFileUplaod(_res){
-    console.log(_res)
-    this.createProblem.get('FileName').setValue(_res.FileName);
-    this.createProblem.get('ExternalLink').setValue(_res.FilePath);
+    this.createProblem.get('Files').setValue(_res);
   }
 
   private getIssueType(_tags: Array<string>): string {
@@ -131,7 +130,7 @@ export class AppAddProblemComponent implements OnInit {
       this.commonService.showMessage('Required filed missing');
       return;
     }
-    if (!this.createProblem.get('FileName').value || !this.createProblem.get('ExternalLink').value) {
+    if (!this.createProblem.get('Files').value) {
       this.commonService.showMessage('file missing');
       return;
     }

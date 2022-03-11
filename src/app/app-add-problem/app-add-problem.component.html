@@ -237,7 +237,7 @@
             </div>
         
             <div class="w-full  w-1/4">
-                <app-file-upload class="h-52" (onUplodFileEmmit)="onFileUplaod($event)"></app-file-upload>
+                <app-file-upload class="h-52" [inputFiles]="createProblem?.get('Files')?.value" (onUplodFileEmmit)="onFileUplaod($event)"></app-file-upload>
             </div>
         </div>
 

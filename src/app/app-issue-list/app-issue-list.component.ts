@@ -54,6 +54,19 @@ export class AppIssueListComponent implements OnInit {
   }
 
 
+
+  downloadFile(_file){
+    this.bankProblemService.getFile(_file.FileName).subscribe(blob => {
+      //  console.log(res)
+      let url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      document.body.appendChild(a);
+      a.href = url;
+      a.download = _file.FileName;
+      a.target = '_blank';
+      a.click();
+    })
+  }
   approvedItem(problem) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '250px',
