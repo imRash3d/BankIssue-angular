@@ -254,10 +254,7 @@ export class AppAddProblemComponent implements OnInit {
   }
 
   onSelectFamily(e: any, type: any) {
-
-
-    const fdivision = AppConfig.FAMILTY_DIVISION[String(e).toUpperCase()]
-    this.familyDivison[type] = fdivision;
+    this.familyDivison[type] = this.bankProblemService.onSelectFamily(e)
   }
   cancel() {
     this.router.navigateByUrl('/list')

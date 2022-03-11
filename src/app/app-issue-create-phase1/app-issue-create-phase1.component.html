@@ -1,9 +1,12 @@
-<form class=" w-full bg-white p-5 shadow" >
+<form class=" w-full bg-white p-5 shadow" [formGroup]="phaseForm">
 
     <div class="flex w-full">
         <div class="w-3/12 mr-8 mb-16">
             <p class="text-sm text-black font-semibold py-2">Title</p>
-            <input type="email" placeholder="Title" class="w-full	 border-neutral-800 form-input px-4 py-3 ">
+            <mat-form-field class="example-full-width " appearance="outline">
+                <mat-label>Title</mat-label>
+                <input formControlName="Title" matInput>
+            </mat-form-field>
         </div>
 
 
@@ -16,22 +19,33 @@
         <div class="flex w-full">
             <div class="flex w-3/4	">
                 <div class="w-2/4 mr-8">
-                    <p class="text-sm text-black font-semibold py-2">Name</p>
-                    <input type="email" placeholder="Title"
-                        class="w-full	 border-neutral-800 form-input px-4 py-3 ">
+                    <p class="text-sm text-black font-semibold py-2"> Name</p>
+                    <mat-form-field class="example-full-width w-full" appearance="outline">
+                        <mat-label>Name</mat-label>
+                        <input formControlName="Title" matInput>
+
+                    </mat-form-field>
                 </div>
-                <div class="w-2/4	 mx-8 ">
+                <div class="w-2/4	 mx-8 " style="position: relative;">
                     <p class="text-sm text-black font-semibold py-2"> Email</p>
-                    <input type="email" placeholder="Title"
-                        class="w-full	 border-neutral-800 form-input px-4 py-3 ">
+                    <mat-form-field class="example-full-width w-full " appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input matInput type="email" formControlName="ProblemLeadEmail">
+                    </mat-form-field>
+                    <small class="text-danger error-email" *ngIf="phaseForm.get('ProblemLeadEmail').errors?.email">Email
+                        address is invalid</small>
                 </div>
                 <div class="w-2/4	 mx-8 ">
+
                     <p class="text-sm text-black font-semibold py-2"> Department</p>
-                    <input type="email" placeholder="Title"
-                        class="w-full	 border-neutral-800 form-input px-4 py-3 ">
+                    <mat-form-field class="example-full-width w-full " appearance="outline">
+                        <mat-label>Name</mat-label>
+                        <input formControlName="Title" matInput>
+
+                    </mat-form-field>
                 </div>
             </div>
-            <div class="w-1/4	 mt-8 pt-3	">
+            <div class="w-1/4	 mt-8 pt-5	">
                 <i class="fa-solid add-btn-icon cursor-pointer fa-plus"></i>
             </div>
         </div>
@@ -39,117 +53,205 @@
 
     </div>
 
+    <div class="flex w-full">
+        <div class="w-3/12 mr-8">
+            <p class="text-sm text-black font-semibold py-2">Business Impact </p>
+
+            <mat-form-field class="example-full-width " appearance="outline">
+                <mat-label>Business Impact</mat-label>
+                <input formControlName="BusinessImpact" matInput>
+
+            </mat-form-field>
+        </div>
+        <div class="w-9/12	">
+            <p class="text-sm text-black font-semibold py-2">Related To</p>
+
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Select</mat-label>
+                <mat-select formControlName="IssueType">
+                    <mat-option class="text-capitalize" [value]="item" *ngFor="let item of issueTypes">{{item}}
+                    </mat-option>
+
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="w-5/12	 mx-8">
+            <p class="text-sm text-black font-semibold py-2">Department</p>
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Select</mat-label>
+                <mat-select formControlName="Department">
+                    <mat-option [value]="item" *ngFor="let item of departments">{{item.Value}} </mat-option>
+
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="w-5/12	 mx-8 mr-0">
+            <p class="text-sm text-black font-semibold py-2">Tags</p>
+
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Select</mat-label>
+                <mat-select multiple formControlName="Tags">
+                    <mat-option class="text-capitalize" [value]="item" *ngFor="let item of tags">{{item}}
+                    </mat-option>
+
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
 
     <!--  Related to Claim-->
 
-    <ng-container>
+    <ng-container *ngIf="phaseForm?.get('ShowCliam')?.value">
         <div>
-            <p class="text-sm text-black font-semibold py-2 mt-5"></p>
+            <p class="text-sm text-black font-semibold py-2 mt-5">Related To (Cliam)</p>
         </div>
-        <div class="flex w-full mt-5 border-b-2 border-slate-900 pb-5">
+        <div class="flex w-full mt-5 border-b-2 border-slate-900 pb-5" formGroupName="Claim">
             <div class="w-3/12 mr-8">
-                <p class="text-sm text-black font-semibold py-2">Business Impact </p>
-                <input type="email" placeholder="Title" class="w-full	 border-neutral-800 form-input px-4 py-3 ">
+                <p class="text-sm text-black font-semibold py-2">Code</p>
+                <mat-form-field class="example-full-width w-full " appearance="outline">
+                    <mat-label>Code</mat-label>
+                    <input formControlName="Code" matInput>
+                </mat-form-field>
             </div>
             <div class="w-5/12	 mx-8 ">
-                <p class="text-sm text-black font-semibold py-2">Related to</p>
-                <input type="email" placeholder="Title" class="w-full	 border-neutral-800 form-input px-4 py-3 ">
+                <p class="text-sm text-black font-semibold py-2">Category</p>
+                <mat-form-field appearance="outline" class="w-full">
+                    <mat-label>Select</mat-label>
+                    <mat-select formControlName="Category" multiple>
+                        <mat-option class="text-capitalize" [value]="item" *ngFor="let item of catagories">{{item}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
             <div class="w-9/12	">
-                <p class="text-sm text-black font-semibold py-2">Department</p>
-                <!-- <input type="email" placeholder="Title" class="w-full	 border-neutral-800 form-input px-4 py-3 "> -->
-                <select class="px-4 py-3  w-full  shadow-sm block">
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
-                </select>
+                <p class="text-sm text-black font-semibold py-2">Family</p>
+                <mat-form-field appearance="outline" class="w-full">
+                    <mat-label>Select</mat-label>
+                    <mat-select formControlName="Family" (selectionChange)="onSelectFamily($event.value,'claim')">
+                        <mat-option class="text-capitalize" [value]="item" *ngFor="let item of families">{{item}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
             <div class="w-5/12	 mx-8 mr-0">
-                <p class="text-sm text-black font-semibold py-2">Tags</p>
-                <select class="px-4 py-3  w-full  shadow-sm block">
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
-                </select>
+                <p class="text-sm text-black font-semibold py-2">Family Division</p>
+                <mat-form-field appearance="outline" class="w-full">
+                    <mat-label>Select</mat-label>
+                    <mat-select formControlName="FamilyDivision">
+                        <mat-option class="text-capitalize" [value]="item" *ngFor="let item of familyDivison['claim']">
+                            {{item}} </mat-option>
+
+
+                    </mat-select>
+                </mat-form-field>
             </div>
 
         </div>
     </ng-container>
 
     <!--   Related to Inssurance-->
-    <ng-container>
-
-        <div class="flex w-full mt-5 border-b-2 border-slate-900 pb-8">
+    <ng-container *ngIf="phaseForm?.get('ShowInsurance')?.value">
+        <div>
+            <p class="text-sm text-black font-semibold py-2 mt-5">Related To (Insurance)</p>
+        </div>
+        <div class="flex w-full mt-5 border-b-2 border-slate-900 pb-5" formGroupName="Insurance">
             <div class="w-3/12 mr-8">
-                <p class="text-sm text-black font-semibold py-2">ProblemLead Name</p>
-                <input type="email" placeholder="Title" class="w-full	 border-neutral-800 form-input px-4 py-3 ">
+                <p class="text-sm text-black font-semibold py-2">Code</p>
+                <mat-form-field class="example-full-width w-full " appearance="outline">
+                    <mat-label>Code</mat-label>
+                    <input formControlName="Code" matInput>
+                </mat-form-field>
             </div>
 
-            <div class="w-9/12	">
-                <p class="text-sm text-black font-semibold py-2">Related to</p>
-                <!-- <input type="email" placeholder="Title" class="w-full	 border-neutral-800 form-input px-4 py-3 "> -->
-                <select class="px-4 py-3  w-full  shadow-sm block">
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
-                </select>
-            </div>
             <div class="w-5/12	 mx-8 ">
-                <p class="text-sm text-black font-semibold py-2">Department</p>
-                <input type="email" placeholder="Title" class="w-full	 border-neutral-800 form-input px-4 py-3 ">
+                <p class="text-sm text-black font-semibold py-2">Category</p>
+                <mat-form-field appearance="outline" class="w-full">
+                    <mat-label>Select</mat-label>
+                    <mat-select formControlName="Category" multiple>
+                        <mat-option class="text-capitalize" [value]="item" *ngFor="let item of catagories">{{item}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="w-9/12	">
+                <p class="text-sm text-black font-semibold py-2">Family</p>
+                <mat-form-field appearance="outline" class="w-full">
+                    <mat-label>Select</mat-label>
+                    <mat-select (selectionChange)="onSelectFamily($event.value,'insurance')" formControlName="Family">
+                        <mat-option class="text-capitalize" [value]="item" *ngFor="let item of families">{{item}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
             <div class="w-5/12	 mx-8 mr-0">
-                <p class="text-sm text-black font-semibold py-2">Tags</p>
-                <select class="px-4 py-3  w-full  shadow-sm block">
-                    <option value="volvo">Volvo</option>
-                    <option value="saab">Saab</option>
-                    <option value="mercedes">Mercedes</option>
-                    <option value="audi">Audi</option>
-                </select>
+                <p class="text-sm text-black font-semibold py-2">Family Division</p>
+                <mat-form-field appearance="outline" class="w-full">
+                    <mat-label>Select</mat-label>
+                    <mat-select formControlName="FamilyDivision">
+                        <mat-option class="text-capitalize" [value]="item"
+                            *ngFor="let item of familyDivison['insurance']">{{item}} </mat-option>
+
+                    </mat-select>
+                </mat-form-field>
             </div>
 
         </div>
     </ng-container>
 
+    <div class="flex w-full mt-5 border-b-2  border-slate-900 pb-10">
+        <div class="w-3/12 mr-8">
+            <p class="text-sm text-black font-semibold py-2">Problem Lead</p>
 
-    <div class="dept-of-p flex w-full mt-5 flex-row justify-between			">
-        <div class="problem-form w-3/4	mt-5 mr-8 flex flex-col  ">
-            <!-- <div class="flex w-full justify-between	">
-                <div class=" mx-3 ml-0  w-1/3">
-                    <p class="text-sm text-black font-semibold py-2">Text</p>
-                    <input type="email" placeholder="Title"
-                        class="w-full	 border-neutral-800 form-input px-4 py-3 ">
-                </div>
-                <div class="w-1/3	mx-3  ">
-                    <p class="text-sm text-black font-semibold py-2">From When</p>
-                    <input type="email" placeholder="Title"
-                        class="w-full	 border-neutral-800 form-input px-4 py-3 ">
-                </div>
-                <div class="w-1/3 mx-3 	 ">
-                    <p class="text-sm text-black font-semibold py-2">From To</p>
-                    <input type="email" placeholder="Title"
-                        class="w-full	 border-neutral-800 form-input px-4 py-3 ">
-                </div>
-            </div>
-            <div class="flex w-full mt-5 ustify-between ">
-                <div class=" w-2/4	">
-                    <p class="text-sm text-black font-semibold py-2">Comments</p>
-                    <textarea class="w-full	h-40		block  border-neutral-800 form-input px-4 py-3 "></textarea>
-                </div>
-
-
-            </div> -->
+            <mat-form-field class="example-full-width w-full " appearance="outline">
+                <mat-label>Problem Lead</mat-label>
+                <input formControlName="ProblemLeadName" matInput>
+            </mat-form-field>
         </div>
-        <div
-            class="fileUpload h-40 cursor-pointer w-1/4 content-center	 flex flex-col justify-center		mt-10 file-upload items-center		shadow   p-5 text-center">
+        <div class="w-5/12	 mx-8 " style="position: relative;">
+            <p class="text-sm text-black font-semibold py-2">Problem Lead Email</p>
+            <mat-form-field class="example-full-width w-full " appearance="outline">
+                <mat-label>Problem Lead Email</mat-label>
+                <input matInput type="email" formControlName="ProblemLeadEmail">
 
-            <p class="w-full"><i class="fa-solid fa-upload"></i></p>
-            <p class="w-full">Drag and Drop or Click to file upload </p>
+            </mat-form-field>
+            <small class="text-danger error-email" *ngIf="phaseForm.get('ProblemLeadEmail').errors?.email">Email address
+                is invalid</small>
         </div>
+        <div class="w-9/12	">
+            <p class="text-sm text-black font-semibold py-2">Department Code</p>
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Select</mat-label>
+                <mat-select formControlName="DepartmentCode" multiple>
+                    <mat-option class="text-capitalize" [value]="item" *ngFor="let item of departmentCodes">{{item}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="w-5/12	 mx-8 mr-0">
+            <p class="text-sm text-black font-semibold py-2">Agents</p>
+            <mat-form-field appearance="outline" class="w-full">
+                <mat-label>Select</mat-label>
+                <mat-select formControlName="Agents" multiple>
+                    <mat-option [value]="agent" *ngFor="let agent of agents"> {{agent.Value}} -
+                        {{agent.Name}} </mat-option>
+
+
+                </mat-select>
+            </mat-form-field>
+        </div>
+
     </div>
+
+
+
+
+    <!--  Related to Claim-->
+
+
+
+
+ 
 
 
     <div class="dept-of-p mt-8 flex w-full flex-row justify-between">
@@ -161,7 +263,7 @@
                     <button (click)="backToForm()" class="btn bg-red-600 cursor-pointer">Cancel</button>
                 </div>
                 <div class=" ">
-                    <button class="btn bg-blue-600 cursor-pointer">Submit</button>
+                    <button (click)="submit()" class="btn bg-blue-600 cursor-pointer">Submit</button>
                 </div>
                 <!-- <div class=" mx-3 	 ">
                     <button class="btn bg-emerald-500 cursor-pointer">Move to next Phase</button>

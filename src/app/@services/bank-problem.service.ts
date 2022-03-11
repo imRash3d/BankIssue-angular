@@ -71,4 +71,23 @@ export class BankProblemService {
         }))
         
     }
+
+    onSelectFamily(e){
+        const fdivision = AppConfig.FAMILTY_DIVISION[String(e).toUpperCase()]
+        return fdivision;
+    }
+
+    initIssueValidators(control, _validators){
+        control.controls['Code'].setValidators(_validators)
+        control.controls['Code'].updateValueAndValidity();
+    
+        control.controls['Family'].setValidators(_validators);
+        control.controls['Family'].updateValueAndValidity();
+    
+        control.controls['FamilyDivision'].setValidators(_validators);
+        control.controls['FamilyDivision'].updateValueAndValidity();
+    
+        control.controls['Category'].setValidators(_validators);
+        control.controls['Category'].updateValueAndValidity();
+    }
 }
