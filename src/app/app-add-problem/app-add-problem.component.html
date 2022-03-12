@@ -270,7 +270,7 @@
     </form>
 
     <ng-container *ngIf="!showAddForm" >
-        <app-issue-create-phase1 (onBackEmit)="backToForm($event)" [agents]="agents" [departments]="departments" class="flex w-full"></app-issue-create-phase1>
+        <app-issue-create-phase (onBackEmit)="backToForm($event)" [agents]="agents" [departments]="departments" class="flex w-full"></app-issue-create-phase>
     </ng-container>
    
 </div>

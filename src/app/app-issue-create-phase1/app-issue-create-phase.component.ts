@@ -4,11 +4,11 @@ import { AppConfig } from '../@app-config/app-config.constant';
 import { BankProblemService } from '../@services/bank-problem.service';
 
 @Component({
-  selector: 'app-issue-create-phase1',
-  templateUrl: './app-issue-create-phase1.component.html',
-  styleUrls: ['./app-issue-create-phase1.component.scss']
+  selector: 'app-issue-create-phase',
+  templateUrl: './app-issue-create-phase.component.html',
+  styleUrls: ['./app-issue-create-phase.component.scss']
 })
-export class AppIssueCreatePhase1Component implements OnInit {
+export class AppIssueCreatePhaseComponent implements OnInit {
   @Input() departments = [];
   departmentCodes = AppConfig.DEPARTMENT_CODE;
   issueTypes = AppConfig.ISSUE_TYPE;

@@ -4,7 +4,7 @@ import {HttpClient, HttpClientModule} from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AppIssueListComponent } from './app-issue-list/app-issue-list.component';
-import { AppIssueCreatePhase1Component } from './app-issue-create-phase1/app-issue-create-phase1.component';
+import { AppIssueCreatePhaseComponent } from './app-issue-create-phase1/app-issue-create-phase.component';
 import { AppAddProblemComponent } from './app-add-problem/app-add-problem.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -22,7 +22,7 @@ import { SharedModule } from './shared/shared.module';
   declarations: [
     AppComponent,
     AppIssueListComponent,
-    AppIssueCreatePhase1Component,
+    AppIssueCreatePhaseComponent,
     AppAddProblemComponent,
    
   ],
