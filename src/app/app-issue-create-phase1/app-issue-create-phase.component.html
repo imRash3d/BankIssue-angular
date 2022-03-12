@@ -16,39 +16,42 @@
         <div class="w-full">
             <p class="text-sm text-black font-semibold py-2 mt-5 w-full">Stakeholder</p>
         </div>
-        <div class="flex w-full">
-            <div class="flex w-3/4	">
-                <div class="w-2/4 mr-8">
-                    <p class="text-sm text-black font-semibold py-2"> Name</p>
-                    <mat-form-field class="example-full-width w-full" appearance="outline">
-                        <mat-label>Name</mat-label>
-                        <input formControlName="Title" matInput>
-
-                    </mat-form-field>
+       
+        <ng-container formArrayName="Stakeholders">
+            <div class="flex w-full" *ngFor="let stakeholder of phaseForm.get('Stakeholders')['controls'];let i=index;let last = last;" [formGroupName]="i">
+                <div class="flex w-3/4	">
+                    <div class="w-2/4 mr-8">
+                        <p class="text-sm text-black font-semibold py-2"> Name</p>
+                        <mat-form-field class="example-full-width w-full" appearance="outline">
+                            <mat-label>Name</mat-label>
+                            <input formControlName="Name" matInput>
+    
+                        </mat-form-field>
+                    </div>
+                    <div class="w-2/4	 mx-8 " style="position: relative;">
+                        <p class="text-sm text-black font-semibold py-2"> Email</p>
+                        <mat-form-field class="example-full-width w-full " appearance="outline">
+                            <mat-label>Email </mat-label>
+                            <input matInput type="email" formControlName="Email">
+                        </mat-form-field>
+                        <small class="text-danger error-email" *ngIf="stakeholder.get('Email').errors?.email">Email
+                            address is invalid</small>
+                    </div>
+                    <div class="w-2/4	 mx-8 ">
+    
+                        <p class="text-sm text-black font-semibold py-2"> Department</p>
+                        <mat-form-field class="example-full-width w-full " appearance="outline">
+                            <mat-label>Name</mat-label>
+                            <input formControlName="Department" matInput>
+    
+                        </mat-form-field>
+                    </div>
                 </div>
-                <div class="w-2/4	 mx-8 " style="position: relative;">
-                    <p class="text-sm text-black font-semibold py-2"> Email</p>
-                    <mat-form-field class="example-full-width w-full " appearance="outline">
-                        <mat-label>Email</mat-label>
-                        <input matInput type="email" formControlName="ProblemLeadEmail">
-                    </mat-form-field>
-                    <small class="text-danger error-email" *ngIf="phaseForm.get('ProblemLeadEmail').errors?.email">Email
-                        address is invalid</small>
-                </div>
-                <div class="w-2/4	 mx-8 ">
-
-                    <p class="text-sm text-black font-semibold py-2"> Department</p>
-                    <mat-form-field class="example-full-width w-full " appearance="outline">
-                        <mat-label>Name</mat-label>
-                        <input formControlName="Title" matInput>
-
-                    </mat-form-field>
+                <div class="w-1/4	 mt-8 pt-5	" *ngIf="last">
+                    <i (click)="add(stakeholder)" class="fa-solid add-btn-icon cursor-pointer fa-plus"></i>
                 </div>
             </div>
-            <div class="w-1/4	 mt-8 pt-5	">
-                <i class="fa-solid add-btn-icon cursor-pointer fa-plus"></i>
-            </div>
-        </div>
+        </ng-container>
 
 
     </div>
@@ -250,7 +253,13 @@
 
 
 
-
+    <div class="dept-of-p flex w-full mt-5 flex-row justify-end	">
+      
+    
+        <div class="w-full  w-1/4">
+            <app-file-upload class="h-52" [inputFiles]="phaseForm?.get('Files')?.value" (onUplodFileEmmit)="onFileUplaod($event)"></app-file-upload>
+        </div>
+    </div>
  
 
 

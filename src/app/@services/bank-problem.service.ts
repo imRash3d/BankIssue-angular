@@ -90,4 +90,22 @@ export class BankProblemService {
         control.controls['Category'].setValidators(_validators);
         control.controls['Category'].updateValueAndValidity();
     }
+
+
+
+    createProblemPhase(data) {
+        return this.http.post(this.API_URL + '/BankProblem/add-phase', data);
+    }
+
+    editProblemPhase(data) {
+        return this.http.post(this.API_URL + '/BankProblem/update-phase/'+data.Id, data);
+    }
+
+
+    getPhase(problemId: number) {
+        return this.http.get(this.API_URL + '/BankProblem/phase/' + problemId).pipe(map((resposne: any) =>
+            resposne.Success ? resposne.Result : null
+        ));
+    }
+
 }
