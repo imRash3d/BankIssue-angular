@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { BankProblemService } from 'src/app/@services/bank-problem.service';
 
@@ -7,16 +7,21 @@ import { BankProblemService } from 'src/app/@services/bank-problem.service';
   templateUrl: './file-upload.component.html',
   styleUrls: ['./file-upload.component.scss']
 })
-export class FileUploadComponent implements OnInit {
+export class FileUploadComponent implements OnInit ,OnChanges {
 
   files: any;
   fileName: string;
   uploadedFiles = [];
+  @Input() inputFiles = [];
   @Output() onUplodFileEmmit = new EventEmitter();
   constructor(
     private bankProblemService: BankProblemService
   ) { }
-
+ngOnChanges(changes: SimpleChanges): void {
+  if(this.inputFiles && this.inputFiles.length){
+    this.uploadedFiles = this.inputFiles
+  }
+}
   upenUrl(e, fileName) {
     e.stopPropagation();
     this.bankProblemService.getFile(fileName).subscribe(blob => {
@@ -66,10 +71,11 @@ export class FileUploadComponent implements OnInit {
     forkJoin(callList).subscribe((_response: any) => {
       if (_response.every(x => x.Success)) {
         _response.forEach(r => {
-          this.onUplodFileEmmit.emit(r.Result);
+         
           this.uploadedFiles = this.uploadedFiles.concat(r.Result);
           console.log(this.uploadedFiles)
-        })
+        });
+        this.onUplodFileEmmit.emit(this.uploadedFiles);
       }
     })
   }

@@ -42,7 +42,12 @@
                        <td class=" border-current text-sm font-semibold tracking-wide text-left" >{{problem.Site}}</td>
                     
                        <td class=" border-current text-sm font-semibold tracking-wide text-left" >
-                           <a [href]="problem.ExternalLink | safeHtml" target="_blank">{{problem.FileName}}</a>
+                          <ul class="mx-5" *ngIf="problem?.Files;NOFILE" >
+                              <li class="my-1" style="list-style: disc;" *ngFor="let file of problem?.Files" > <a class="cursor-pointer" (click)="downloadFile(file)"  target="_blank">{{file.FileName}}</a></li>
+                          </ul>
+                          <ng-template #NOFILE>
+                                -
+                          </ng-template>
                        </td>
                  
                        
