@@ -190,7 +190,13 @@ export class AppAddProblemComponent implements OnInit {
     obs.subscribe((res: any) => {
       console.log(res)
       if (res.Success) {
-        this.router.navigateByUrl('/list')
+        
+        const mgs = this.editMode ? 'Problem updated successfully' : 'Problem added successfully '
+        this.commonService.showMessage(mgs);
+
+        setTimeout(() => {
+          this.router.navigateByUrl('/list')
+        }, 1000)
       }
     })
   }
