@@ -262,6 +262,10 @@
                         <button (click)="nextPhase()" class="btn bg-emerald-500 cursor-pointer">Move to next
                             Phase</button>
                     </div>
+                    <div class=" mx-3 	 " *ngIf="editMode && !createProblem.get('IsApproved').value">
+                        <button (click)="approvedItem()" class="btn bg-emerald-500 cursor-pointer">
+                            Approved</button>
+                    </div>
                 </div>
 
             </div>

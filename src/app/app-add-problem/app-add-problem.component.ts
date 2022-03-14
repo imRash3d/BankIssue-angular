@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AppConfig } from '../@app-config/app-config.constant';
 import { BankProblemService } from '../@services/bank-problem.service';
 import { CommonService } from '../@services/common.service';
+import { ConfirmDialogComponent } from '../shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-app-add-problem',
@@ -30,6 +32,7 @@ export class AppAddProblemComponent implements OnInit {
   problemId: string;
   editMode = false;
   constructor(
+    private dialog: MatDialog,
     private bankProblemService: BankProblemService,
     private commonService: CommonService,
     private fb: FormBuilder,
@@ -73,6 +76,31 @@ export class AppAddProblemComponent implements OnInit {
 
   onFileUplaod(_res){
     this.createProblem.get('Files').setValue(_res);
+  }
+
+  approvedItem(){
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      width: '250px',
+      data: { title: 'Confirm Approved', subtitle: 'Are you sure want to approved?' },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        const model = {
+          Id: this.problemId,
+          IsApproved: true
+        }
+        this.bankProblemService.approvedProblem(model).subscribe((res: any) => {
+          console.log(res)
+          if (res.Success) {
+            this.createProblem.get('IsApproved').setValue(true);
+            
+          }
+        })
+      }
+      // console.log('The dialog was closed');
+
+    });
   }
 
   private getIssueType(_tags: Array<string>): string {

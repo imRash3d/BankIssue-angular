@@ -70,19 +70,19 @@ export class AppIssueListComponent implements OnInit {
   approvedItem(problem) {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
       width: '250px',
-      data: { title: 'Confirm Approved', subtitle: 'Are you sure want to approved?' },
+      data: { title: 'Confirm Approved', subtitle: `Are you sure want to ${problem.IsApproved?'Decline':'approved'}?` },
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         const model = {
           Id: problem.Id,
-          IsApproved: true
+          IsApproved: !problem.IsApproved
         }
         this.bankProblemService.approvedProblem(model).subscribe((res: any) => {
           console.log(res)
           if (res.Success) {
-
+             
              problem.IsApproved = model.IsApproved;
             
           }
