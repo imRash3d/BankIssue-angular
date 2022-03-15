@@ -47,8 +47,9 @@
                         </mat-form-field>
                     </div>
                 </div>
-                <div class="w-1/4	 mt-8 pt-5	" *ngIf="last">
-                    <i (click)="add(stakeholder)" class="fa-solid add-btn-icon cursor-pointer fa-plus"></i>
+                <div class="w-1/4	 mt-8 pt-5	" >
+                    <i (click)="add(stakeholder)" *ngIf="last" class="fa-solid mr-5 add-btn-icon cursor-pointer fa-plus"></i>
+                    <i  *ngIf="!last" (click)="remove(i)" class=" fa-solid add-btn-icon cursor-pointer fa-trash"></i>
                 </div>
             </div>
         </ng-container>

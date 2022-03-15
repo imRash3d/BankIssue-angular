@@ -119,7 +119,9 @@ export class AppAddProblemComponent implements OnInit {
 
 
   private getMatchedDepartmens(_departments) {
+
     const dept = this.departments.find(x => x.Id == _departments.Id);
+    console.log(_departments , dept)
     return dept;
   }
   private getMatchedAgents(_agents) {

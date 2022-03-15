@@ -136,7 +136,8 @@ export class AppIssueCreatePhaseComponent implements OnInit, OnChanges {
       ShowInsurance: [data && data.Insurance ? true : false],
       IsApproved: [data && data.IsApproved || false],
       Files: [data && data.Files || null],
-      Stakeholders: this.fb.array(data && data.Stakeholders.map(x => this.initStakeholder(x)) || [this.initStakeholder()])
+      Stakeholders: this.fb.array(data && data.Stakeholders.map(x => this.initStakeholder(x)) || [this.initStakeholder()]),
+      DeleteStakeholderIds:[[]]
     })
   }
 
@@ -202,6 +203,19 @@ export class AppIssueCreatePhaseComponent implements OnInit, OnChanges {
     })
 
 
+  }
+
+
+  remove(index){
+    const value = this.stakeholderControl.controls[index].value;
+    console.log(value)
+    if(value && value.Id){
+      const temp = this.phaseForm.get('DeleteStakeholderIds').value;
+      temp.push(value.Id)
+    }
+
+    console.log(this.phaseForm.get('DeleteStakeholderIds').value)
+    this.stakeholderControl.removeAt(index)
   }
 
   removeIdProps(model) {
